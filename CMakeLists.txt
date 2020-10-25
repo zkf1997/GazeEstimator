@@ -2,10 +2,12 @@ cmake_minimum_required(VERSION 3.9.0)
 project(gaze_estimator LANGUAGES C CXX
     VERSION 0.1)
 
+#####################################
 # please modify the paths accordingly
 add_subdirectory(D:/coding/libs/dlib-19.21/dlib dlib_build)# add dlib
 set(OpenCV_DIR D:/coding/libs/opencv/build)#set opencv directory
 set(CMAKE_PREFIX_PATH D:/coding/libs/libtorch)#set libtorch directory
+#####################################
 
 find_package(Torch REQUIRED)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${TORCH_CXX_FLAGS}")
