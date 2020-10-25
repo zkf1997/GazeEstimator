@@ -5,11 +5,9 @@ This program first reads an face image and normalize it. Then a previously train
 
  
 ## Requirements
-[opencv](https://opencv.org/)
-
-[libtorch](https://pytorch.org/get-started/locally/)
-
-[dlib](http://dlib.net/)   
+    opencv
+    libtorch
+    dlib
 
 This implementation is tested on windows 10 2004 with dlib 19.21, opencv 4.5.0 and libtorch 1.6.0 Release Version.
 
