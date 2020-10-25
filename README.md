@@ -16,5 +16,5 @@ This implementation is tested on windows 10 2004 with dlib 19.21, opencv 4.5.0 a
 ## usage
 Please first set paths to dlib, opencv and libtorch accordingly in [CMakeLists.txt](./CMakeLists.txt). Then just build with CMake.
 
-To use GPU for inference, please uncomment two lines in [gaze_estimator.cpp](./gaze_estimator.cpp) to move the model and input to CUDA.
+To use GPU for inference, please set USE_CUDA=true in [gaze_estimator.cpp](./gaze_estimator.cpp) to move the model and input to CUDA.
 

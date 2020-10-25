@@ -33,6 +33,8 @@ using namespace std;
 using namespace cv;
 using namespace torch::indexing;
 
+bool USE_CUDA = false;
+
 void MatType(Mat inputMat)
 {
     int inttype = inputMat.type();
@@ -164,7 +166,8 @@ int main()
     try {
         // Deserialize the ScriptModule from a file using torch::jit::load().
         module = torch::jit::load(model_file);
-        //module.to(at::kCUDA); //uncomment to inference with gpu, first inference will be slower than cpu due to warmup
+        if (USE_CUDA)
+            module.to(at::kCUDA); //uncomment to inference with gpu, first inference will be slower than cpu due to warmup
     }
     catch (const c10::Error& e) {
         std::cerr << "error loading the model\n";
@@ -182,7 +185,8 @@ int main()
     at::Tensor tensor_image = torch::from_blob(input_var.data, {1, input_var.rows, input_var.cols, 3}/*, options*/).permute({ 0, 3, 1, 2 });
     tensor_image = tensor_image.toType(at::kFloat);
     std::vector<torch::jit::IValue> inputs;
-    //tensor_image = tensor_image.to(at::kCUDA);//if the model loaded is cuda, then input tensor need to be cuda
+    if (USE_CUDA)
+        tensor_image = tensor_image.to(at::kCUDA);//if the model loaded is cuda, then input tensor need to be cuda
     inputs.push_back(tensor_image);
 
     // Execute the model and turn its output into a tensor.
